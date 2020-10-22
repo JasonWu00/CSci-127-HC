@@ -6,12 +6,15 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-borough = input("Borough: ")
+firstBorough = input("First borough: ")
+secondBorough = input("Second borough: ")
+filename = input("File name: ")
 
 pop = pd.read_csv('nycHistPop.csv',skiprows=5)
+pop["Fraction"] = (pop[firstBorough] + pop[secondBorough]) / pop["Total"]
+pop.plot(x="Year", y="Fraction")
 
-print("Min: ", pop[borough].min())
-print("Max: ", pop[borough].max())
-print("Mean: ", pop[borough].mean())
-print("Median: ", pop[borough].median())
-print("Standard Deviation: ", pop[borough].std())
+plt.show()
+
+plt.savefig(filename)
+
